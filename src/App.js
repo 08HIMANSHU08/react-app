@@ -1,5 +1,9 @@
 
-import ExpenseItem from './components/ExpenseItem';
+import React from 'react';
+
+import ExpenseItem from './components/Expenses/ExpenseItem';
+import './components/Expenses/Expenses.css';
+import Card from './components/UI/Card';
 
 function App() {
   const expenses = [
@@ -9,12 +13,12 @@ function App() {
     {location:"Barabanki",price:150,desc:"Food",date:new Date(2022,10,3)}
   ]
   return (
-    <div>
+    <Card className='expense'>
       <h2> Expense Item</h2>
       {expenses.map((ele) => {
         return <ExpenseItem location={ele.location} price={ele.price}desc={ele.desc} date={ele.date}></ExpenseItem>
       })}
-    </div>
+    </Card>
   );
 }
 
