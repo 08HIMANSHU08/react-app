@@ -6,12 +6,17 @@ import ExpenseDate from './ExpenseDate';
 import ExpenseDetails from './ExpenseDetails';
 import Card from '../UI/Card'
 
-function ExpenseItem(props) {
-    // console.log(props)
+const ExpenseItem = (props) => {
+    
+    const clickHandler = () => {
+        console.log("Clicked");
+    }
+
     return (
             <Card className='expense-item'> 
             <ExpenseDate date ={props.date}></ExpenseDate>
             <ExpenseDetails location={props.location} desc={props.desc} price={props.price}></ExpenseDetails> 
+            <button onClick={clickHandler}>Delete Expense</button>
             </Card>  
     )
 }
