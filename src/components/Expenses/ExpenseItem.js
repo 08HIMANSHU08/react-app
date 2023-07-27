@@ -7,19 +7,17 @@ import ExpenseDetails from './ExpenseDetails';
 import Card from '../UI/Card'
 
 const ExpenseItem = (props) => {
-    
+
     const [desc,setDesc] = useState(props.desc);
 
     const [price, setPrice] = useState(props.price);
     
     const priceClickHandler = () =>{
         setPrice(100);
-        console.log(price);
     }
 
     const clickHandler = () => {
         setDesc('UpdatedFood');
-        console.log(desc);
     }
 
     return (
