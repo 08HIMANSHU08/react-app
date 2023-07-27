@@ -11,31 +11,44 @@ let DummyExpenses = [
   {id:1,location:"Lucknow",price:50,desc:"Food",date:new Date(2020,2,12)},
   {id:2,location:"Kanpur",price:300,desc:"Movie",date:new Date(2022,4,9)},
   {id:3,location:"Prayagraj",price:200,desc:"Game",date:new Date(2021,8,8)},
-  {id:4,location:"Barabanki",price:150,desc:"Food",date:new Date(2019,10,3)}
+  {id:4,location:"Barabanki",price:150,desc:"Food",date:new Date(2023,10,3)}
 ]
 
 const App = ()=> {
 
   const [expenses,setExpenses] = useState(DummyExpenses);
 
-  const [filteredYear, setFilteredYear] = useState('2020')
+  const [filteredYear, setFilteredYear] = useState('ALL')
 
   const filterChangeHandler = selectedYear =>{
-    setFilteredYear(selectedYear);
+    setFilteredYear(selectedYear)
   }
   
   const addExpenseHandler = (expense) =>{
       setExpenses([expense,...expenses])
   }
 
+  const filteredExpenses = expenses.filter(expense=>{
+    if(filteredYear=="ALL"){
+      return expense;
+    }
+    return expense.date.getFullYear().toString()==filteredYear;
+  })
+
   return (
     <Card className='expense'>
       <h2> Expense Item</h2>
       <NewExpense onAddExpense={addExpenseHandler}></NewExpense>
       <ExpenseFilter selected={filteredYear} onChangeFilter={filterChangeHandler}></ExpenseFilter>
-      {expenses.map((ele) => {
-        return <ExpenseItem key={ele.id} location={ele.location} price={ele.price}desc={ele.desc} date={ele.date}></ExpenseItem>
-      })}
+      {filteredExpenses.length===0 ? ( 
+        <p>No Expense Found</p>
+        )
+        : 
+        ( filteredExpenses.map((ele) => {
+         return <ExpenseItem key={ele.id} location={ele.location} price={ele.price}desc={ele.desc} date={ele.date}></ExpenseItem>
+        })
+        )
+      }
     </Card>
   );
 }
