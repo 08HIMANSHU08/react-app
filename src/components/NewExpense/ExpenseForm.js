@@ -3,7 +3,7 @@ import React,{useState} from "react";
 
 import './ExpenseForm.css'
 
-const ExpenseForm = () => {
+const ExpenseForm = (props) => {
 
     const [enteredDesc, setEnteredDesc] = useState('');
     const [enteredLocation, setEnteredLocation] = useState('');
@@ -76,27 +76,30 @@ const ExpenseForm = () => {
             location:enteredLocation,
             date:new Date(enteredDate),
         }
-        console.log(obj);
+        props.onSaveExpenseData(obj);
+        setEnteredDate('');
+        setEnteredDesc('');
+        setEnteredLocation('');
+        setEnteredPrice('');
     }
     
-
     return (<form onSubmit={submitHandler}>
         <div className="new-expense__controls"> 
             <div className="new-expense__control">
                 <label>Location</label>
-                <input type="text" onChange={locationChangeHandler}/>
+                <input type="text" value={enteredLocation} onChange={locationChangeHandler}/>
             </div>
             <div className="new-expense__control">
                 <label>Description</label>
-                <input type="text" onChange={descChangeHandler}/>
+                <input type="text" value={enteredDesc} onChange={descChangeHandler}/>
             </div>
             <div className="new-expense__control">
                 <label>Date</label>
-                <input type="date" onChange={dateChangeHandler}/>
+                <input type="date" value={enteredDate} onChange={dateChangeHandler}/>
             </div>
             <div className="new-expense__control">
                 <label>Price</label>
-                <input type="text" onChange={priceChangeHandler}/>
+                <input type="text" value={enteredPrice} onChange={priceChangeHandler}/>
             </div>
         </div>
         <div className="new-expense__actions">
